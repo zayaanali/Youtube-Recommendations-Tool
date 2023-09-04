@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <style>
+    table.vidTable {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+  <div>
+    <h1 style="text-align:center;">Creator Suggestions </h1>
+</head>
+
+
+<body>
+  <form action="/" style="background-color:powderblue;" method="get">
+    <input style="text-align:left;" type="submit" value="Home">
+    <br><br>
+  </form>
+  
+
+  <form action="SearchForSuggestions" method="post" style="background-color:powderblue;">
+    <center>
+      <!-- <input type="text" id="title" placeholder="Get suggestions for your video" name="title"> -->
+      <label for="video-tags">Video Tags</label>
+      <input type="text" id="tags" placeholder="input any tags" name="tags" size="7">
+      <input type="submit" id="searchbutton" value="Search">
+    </center>
+
+  </form>
+
+  </br></br>
+  <form action="/account_info" style="background-color:powderblue;" method="post">
+    <input style="text-align:left;" type="submit" value="See All Suggestions">
+    <br><br>
+  </form>
+
+
+
+
+</body>
+
+
+
+</html>

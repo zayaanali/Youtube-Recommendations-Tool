@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Account & Suggestions</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <h1 style="text-align:center;">Account Information</h1>
+  <form action="/" style="background-color:powderblue;" method="get">
+    <input style="text-align:left;" type="submit" value="Home">
+    <br><br>
+  </form>
+
+  <form action="/updateLogin" method="post" style="background-color:powderblue;text-align:center;">
+    <label for="uname">username:</label>
+    <input type="text" id="uname" name="uname" value="<%= username %>"><br><br>
+    <label for="pass">password:</label>
+    <input type="password" id="pass" name="pass"><br><br>
+    <label for="name">name:</label>
+    <input type="text" id="name" name="name" value="<%= name %>"><br><br>
+    <input type="submit" value="Update">
+  </form>
+  <form action="/deleteAccount" method="post" style="background-color:powderblue;text-align:center;">
+    <input type="submit" value="Delete Account">
+  </form>
+  <h1 style="text-align:center;">Interaction Score: <%=grade%></h1>
+
+  <canvas id="myChart" height="50" ></canvas>
+    <script>
+      var chartData = <%- JSON.stringify(chartData) %>;
+      var ctx = document.getElementById('myChart').getContext('2d');
+      var chart = new Chart(ctx, {
+        type: 'bar',
+        data: chartData,
+        options: {
+          maintainAspectRatio: true,
+          responsive: true,
+          title: {
+        display: true,
+        text: 'Leaderboard Grades'
+      },
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+    </script>
+  <h1 style="text-align:center;">Your Suggestions</h1>
+  <table>
+    <tbody>
+      <% for (var i=0; i < data.length; i +=3) { %>
+        <tr>
+          <% for (var j=0; j < 3; j++) { %>
+            <% if (i + j < data.length) { %>
+              <% var element=data[i + j]; %>
+                <td>
+                  <div>
+                    <a href="https://www.youtube.com/watch?v=<%= element['uservideoId']%>">
+                      <%= element['title'] %>
+                    </a>
+                    <br> 
+                    <a> Tags: <%= element['tags']%> </a>
+                  </div>
+                  <div>
+                    <iframe width="350" height="200" src="https://www.youtube.com/embed/<%= element['uservideoId'] %>"
+                      title="YouTube video player" frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen>
+                    </iframe>
+                  </div>
+                </td>
+                <% } else { %>
+                  <td></td>
+                  <% } %>
+                    <% } %>
+        </tr>
+        <% } %>
+    </tbody>
+  </table>
+
+</body>
+
+</html>

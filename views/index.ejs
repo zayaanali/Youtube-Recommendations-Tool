@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <style>
+    table.vidTable {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+  <div>
+    <h1 style="text-align:center;">Youtube Trends </h1>
+</head>
+
+
+<body>
+
+
+  <form action="/account_info" style="background-color:powderblue;" method="post">
+    <input style="text-align:left;" type="submit" value="Account Info & Your Suggestions">
+    <br><br>
+  </form>
+  <form action="/creator_suggestions" style="background-color:powderblue;" method="post">
+    <input style="text-align:left;" type="submit" value="Search for Suggestions">
+    <br><br>
+  </form>
+  <form action="login_signup" style="background-color:powderblue;text-align:right;" method="post">
+    <label for="uname">username:</label>
+    <input type="text" id="uname" name="uname"><br><br>
+    <label for="pass">password:</label>
+    <input type="password" id="pass" name="pass"><br><br>
+    <input type="submit" id="login" value="Login">
+    <input type="submit" id="signin" value="Sign Up">
+  </form>
+
+  <h3 style="text-align:center;background-color:powderblue;">Hello, <%=name%>
+  </h3>
+  <form action="SearchCell" method="post" style="background-color:powderblue;">
+    <center>
+      <input type="text" id="title" placeholder="Search for a Trending video" name="title">
+      <input type="submit" id="searchbutton" value="Search">
+    </center>
+    <div style="text-align:center">
+      <h4>Additional Video Filters</h4>
+      <label for="video-tags">Video Tags</label>
+      <input type="text" id="tags" placeholder="input a tag" name="tags" size="7">
+
+
+      <label for="uploaddate">Upload Date</label>
+      <select name="uploaddate" id="uploaddate">
+        <option value="today">Today</option>
+        <option value="this-week">This Week</option>
+        <option value="this-month">This Month</option>
+        <option value="this-year">This Year</option>
+      </select>
+      <label for="sortby">Sort By</label>
+      <select name="sortby" id="sortby">
+        <option value="Likes">Likes</option>
+        <option value="Views">View Count</option>
+        <option value="Date">Upload Date</option>
+      </select>
+      <label for="searchalgo">Search Algorithm Bias</label>
+      <select name="searchalgo" id="searchalgo">
+        <option value="channel-popularity">Channel Popularity</option>
+        <option value="like-ratio">Like Ratio</option>
+      </select>
+    </div>
+  </form>
+
+  </br></br>
+
+  <table>
+    <tbody>
+      <% for (var i=0; i < data.length; i +=3) { %>
+        <tr>
+          <% for (var j=0; j < 3; j++) { %>
+            <% if (i + j < data.length) { %>
+              <% var element=data[i + j]; %>
+                <td>
+                  <div>
+                    <a href="https://www.youtube.com/watch?v=<%= element['video_id']%>">
+                      <%= element['title'] %>
+                    </a>
+                  </div>
+                  <div>
+                    <iframe width="350" height="200" src="https://www.youtube.com/embed/<%= element['video_id'] %>"
+                      title="YouTube video player" frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen>
+                    </iframe>
+                  </div>
+                </td>
+                <% } else { %>
+                  <td></td>
+                  <% } %>
+                    <% } %>
+        </tr>
+        <% } %>
+    </tbody>
+  </table>
+
+
+</body>
+
+
+
+</html>
